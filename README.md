@@ -100,8 +100,42 @@ Merging and local problem resolution exercises for git
    * `git checkout JailhouseRock.txt`
    * `git status`
 
-   ![git diff just shows unmerged file paths](../../raw/screenshots/E2-1%20-%20checkout%20destroys%20unstaged%20changes.png)
+   ![git checkout destroys unstaged file changes](../../raw/screenshots/E2-1%20-%20checkout%20destroys%20unstaged%20changes.png)
    
 1. Much better. Now our working directory has no changes! Note that `git checkout` only throws away **unstaged** changes - it has no effect on **staged** files.
 
 
+#### Practice 2: Undoing local (private), committed changes
+1. Let’s edit LifeIsAHighway.txt now. Change Line 3 to "We all live in a yellow submarine".
+1. Stage the changes
+   * `git add LifeIsAHighway.txt`
+1. Commit the changes and confirm with `git status`
+   * `git commit -m "Added the missing submarine"`
+   * `git status`
+1. Oh no, we edited the wrong file! We can’t use `git checkout` to fix this because the changes have already been committed. Let’s try `git reset` instead. The ~1 means "roll back to the commit 1 before HEAD". You could use another number instead.
+   * `git reset HEAD~1`
+   
+   ![git reset un-commits local commits](../../raw/screenshots/E2-1%20-%20reset%20HEAD%20kills%20local%20commits.PNG)
+   
+1. We're closer, but not there yet. Just like with JailhouseRock.txt, `git reset` removed the local (**private**) commit but didn't discard the changes. Let's try it a different way.
+   * `git add LifeIsAHighway.txt`
+   * `git commit -m "Added missing submarine"`
+   * `git reset --hard HEAD~1`
+   * `git status`
+1. Much better. Now our changes are nowhere to be found. It’s important to note that `--hard` ONLY works at the commit level, not the file level. When run at the commit level, `git reset` **will locally revert ALL changes in the commit**, not just changes in a specific file.
+
+
+#### Practice 3: Undoing remote (public) changes
+1. Let’s edit TenThousandFists.txt. Change Line 1 to "Ten Thousand Fists Clutching Straws In The Wind".
+1. Stage your changes, commit, and push
+1. Crap! That was a terrible joke and shouldn't have been pushed to the remote repository! Let's fix it with `git revert`. First though, we have to find out what that bad commit's hash (ID) was.
+   * Use `git log -1` to see the last commit's details, which includes the hash. 1 is just how many commits we want to see.
+   
+   ![git log shows commit hashes](../../raw/screenshots/E2-3%20-%20commit%20hash%20in%20git%20log.png)
+   * Copy the first 5 or 6 characters of the hash
+1. Run `git revert your-hash--here` to revert the commit identified by the hash
+1. Since the commit you want to revert is already in the remote repo (**public**), to reverse it `git revert` creates a second commit that nullifies the original commit’s changes. A text editor will open up for you to change the second commit’s commit message. The default message is fine, so just close the text editor.
+1. `git status` now shows that the second commit is waiting to be made **public** (pushed to the remote repo). Go ahead and `push`.
+   * `git push`
+1. The commit log now shows both the original accidental commit and the reverse commit that corrected it.
+   ![git log shows reverse commit](../../raw/screenshots/E2-3%20-%20git%20log%20shows%20reverse%20commit.png)
