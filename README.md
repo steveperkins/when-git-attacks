@@ -1,9 +1,21 @@
 # when-git-attacks
 Merging and local problem resolution exercises for git
 
+## Table of Contents
+1. [Worksheets](#worksheets)
+   1. [Exercise 1: Merging](#exercise-1-merging)
+      1. [Practice 1: Merging a line conflict](#practice-1-merging-a-line-conflict)
+      1. [Practice 2: Merging multiple conflicts](#practice-2-merging-multiple-conflicts)
+      1. [Practice 3: Merging a file conflict](#practice-3-merging-a-file-conflict)
+
+   1. [Exercise 2: Undoing](#exercise-2-undoing)
+      1. [Practice 1: Undoing local (private), uncommitted changes](#practice-1-undoing-local-private-uncommitted-changes)
+      1. [Practice 2: Undoing local (private), committed changes](#practice-2-undoing-local-private-committed-changes)
+      1. [Practice 3: Undoing remote (public) changes](#practice-3-undoing-remote-public-changes) 
+
 ## Worksheets
-### Exercise 1
-#### Practice 1
+### Exercise 1: Merging
+#### Practice 1: Merging a line conflict
 1. Fork repo at https://github.com/steveperkins/when-git-attacks and clone your fork
 1. To see what branches are available, use `git branch -v -a`
 1. Check out the one-conflict branch. This branch has a conflict that prevents an automatic merge.
@@ -36,7 +48,7 @@ Merging and local problem resolution exercises for git
    * `git merge one-conflict`
 
 
-#### Practice 2
+#### Practice 2: Merging multiple conflicts
 1. Check out the `competing-line-conflict` branch. This branch has conflicts that prevent an automatic merge.
    * `git checkout competing-line-conflict`
 1. Merge the `master` branch into this branch
@@ -55,7 +67,7 @@ Merging and local problem resolution exercises for git
    * `git checkout master`
    * `git merge competing-line-conflict`
 
-#### Practice 3
+#### Practice 3: Merging a file conflict
 1. Check out the `competing-file-conflict` branch. This branch has a conflict that prevents an automatic merge.
    * `git checkout competing-file-conflict`
 1. Merge the `master` branch into this branch
@@ -81,7 +93,7 @@ Merging and local problem resolution exercises for git
 
 
 
-### Exercise 2 Worksheet
+### Exercise 2:  Undoing
 #### Practice 1: Undoing local (private), uncommitted changes
 1. Check out the `reverting` branch
 1. Let's edit JailhouseRock.txt. Make any changes you’d like.
