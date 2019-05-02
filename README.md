@@ -80,3 +80,28 @@ Merging and local problem resolution exercises for git
    * `git merge competing-file-conflict`
 
 
+
+### Exercise 2 Worksheet
+#### Practice 1: Undoing local (private), uncommitted changes
+1. Check out the `reverting` branch
+1. Let's edit JailhouseRock.txt. Make any changes you’d like.
+1. **Stage** your changes
+   * `git add JailhouseRock.txt`
+1. Verify Git knows the file is ready to be committed
+   * `git status`
+1. On second thought, Jailhouse Rock is awesome already. Let’s revert the **staged**-but-not-committed changes.
+   * `git reset HEAD JailhouseRock.txt`
+1. Check the status
+   * `git status`
+   
+   ![git diff just shows unmerged file paths](../../raw/screenshots/E2-2%20-%20revert%20keeps%20changes%20local.PNG)
+   
+1. Wait, what happened? Git **unstaged** the file, but didn’t discard the actual changes. That's good if you accidentally **staged** a change you wanted to keep but didn't want in the next commit. But we really wanted to do is completely throw away the changes to JailhouseRock.txt. To finish the job we have to use `git checkout` to discard local **unstaged changes**.
+   * `git checkout JailhouseRock.txt`
+   * `git status`
+
+   ![git diff just shows unmerged file paths](../../raw/screenshots/E2-1%20-%20checkout%20destroys%20unstaged%20changes.png)
+   
+1. Much better. Now our working directory has no changes! Note that `git checkout` only throws away **unstaged** changes - it has no effect on **staged** files.
+
+
