@@ -1,2 +1,2 @@
 # when-git-attacks
-Merging and local problem resolution exercises for git
+Screenshots for git problem resolution exercises README
